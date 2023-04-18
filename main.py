@@ -20,7 +20,7 @@ def main():
 
     # get api key
     if args.api_key:
-        openai.api_key = api_key
+        openai.api_key = args.api_key
     else:
         with open(args.api_key_path, 'r') as f:
             api_key = f.read().strip()
