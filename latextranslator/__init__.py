@@ -1,0 +1,1 @@
+from latextranslator.translator import LatexTranslator
