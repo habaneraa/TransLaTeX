@@ -29,7 +29,7 @@ def main():
     # prepare output directory
     if args.output is None:
         args.dir = os.path.normpath(args.dir)
-        args.output = os.path.join(os.path.join(args.dir, os.path.pardir), os.path.basename(args.dir) + '_cn')
+        args.output = os.path.join(os.path.join(args.dir, os.path.pardir), os.path.basename(args.dir) + '_' + args.target_language)
     args.output = os.path.realpath(args.output)
     if os.path.exists(args.output) and len(os.listdir(args.output)) > 0:
         print('Warning: path already exists:', args.output)

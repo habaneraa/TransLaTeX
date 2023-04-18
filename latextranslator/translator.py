@@ -31,9 +31,9 @@ class LatexTranslator:
             translated_txt, tokens = chat_completion(get_prompt(chunk, self.source_language, self.target_language), default_system)
             match = re.search(self.pattern, translated_txt, re.DOTALL)
             if match:
-                translated_chunks.append(match.group(1))
+                translated_chunks.append(match.group(1).replace('"""', ''))
             else:
-                translated_chunks.append(translated_txt)
+                translated_chunks.append(translated_txt.replace('"""', ''))
             print(f'translation chat cost tokens: {tokens} ')
             self._tokens_cost += tokens
         return ''.join(translated_chunks)
@@ -97,14 +97,14 @@ class LatexTranslator:
                 text_before_document_env += node.latex_verbatim()
             else:
                 text_after_document_env += node.latex_verbatim()
-        text_before_document_env += '\n\\begin{document}'
+        text_before_document_env += '\n\\begin{document}\n'
 
         txt = self.source_loader.get_text_from_nodes(document_nodes)
         translated_txt = self.translate(txt)
         main_full_text = text_before_document_env + translated_txt + text_after_document_env
 
         save_path = os.path.join(to_dir, self.source_loader.main_source)
-        print(f'Source file {self.source_loader.main_source} translation is completed. Saving to {save_path}')
+        print(f'Translation of source file {self.source_loader.main_source} is completed. Saving to {save_path}')
         with open(save_path, 'w', encoding='utf-8') as f:
             f.write(main_full_text)
 
@@ -115,7 +115,7 @@ class LatexTranslator:
             txt = self.source_loader.get_text_from_nodes(self.source_loader.sources[source])
             translated_txt = self.translate(txt)
             save_path = os.path.join(to_dir, source)
-            print(f'Source file {source} translation is completed. Saving to {save_path}')
+            print(f'Translation of source file {source} is completed. Saving to {save_path}')
             with open(save_path, 'w', encoding='utf-8') as f:
                 f.write(translated_txt)
 
