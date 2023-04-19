@@ -58,8 +58,10 @@ class LatexTranslator:
 
         document_nodes = None
         for node in self.source_loader.sources[self.source_loader.main_source]:
-            if node.isNodeType(LatexEnvironmentNode) and node.envname == 'document':
-                document_nodes = node.nodelist
+            document_node = LatexSourcesLoader.find_env_node(node, 'document')
+            if document_node:
+                document_nodes = document_node.nodelist
+        
         txt = self.source_loader.get_text_from_nodes(document_nodes)
         n_chunks, n_tokens = self.estimate_tokens_cost(txt)
         total_chunks += n_chunks
@@ -90,8 +92,9 @@ class LatexTranslator:
         document_nodes = None
         text_before_document_env, text_after_document_env = '', '\n\\end{document}'
         for node in self.source_loader.sources[self.source_loader.main_source]:
-            if node.isNodeType(LatexEnvironmentNode) and node.envname == 'document':
-                document_nodes = node.nodelist
+            document_node = LatexSourcesLoader.find_env_node(node, 'document')
+            if document_node:
+                document_nodes = document_node.nodelist
                 continue
             if document_nodes is None:
                 text_before_document_env += node.latex_verbatim()

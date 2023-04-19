@@ -17,4 +17,14 @@ TransLaTeX is a lightweighted command line tool for translating LaTeX projects. 
 3. Provide the OpenAI API key as a command-line argument, or save the key in the file `openai-api-key`.
 4. Run the `main.py` script in the root directory and pass the path of your LaTeX project to it.
 
+### Example
+
+```shell
+# Provide the OpenAI API key as a file `./openai-api-key`
+./main.py <latex-src-dir>
+
+# Provide the OpenAI API key as a command-line argument
+./main.py <latex-src-dir> --api_key <openai-api-key>
+```
+
 ## Tips
