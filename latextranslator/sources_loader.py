@@ -102,14 +102,9 @@ class LatexSourcesLoader:
                 self.sources[filename] = new_nodes
                 self._load_includes(new_nodes)
     
-    # @staticmethod
-    # def add_suffix_to_macro_arg(node: LatexMacroNode, suffix) -> None:
-    #     text = node.nodeargd.argnlist[0].nodelist[0].chars
-    #     node.nodeargd.argnlist[0].nodelist[0].chars = text + suffix
-    
     def load_sources(self):
-        if not os.path.exists(os.path.join(self.project_dir, self.main_source)):
-            raise ValueError('Main tex source not found.')
+        if self.main_source is None or not os.path.exists(os.path.join(self.project_dir, self.main_source)):
+            raise ValueError('Main document source is not found.')
         nodes_main = self.parse_latex_file(os.path.join(self.project_dir, self.main_source))
         self.sources[self.main_source] = nodes_main
 
@@ -124,9 +119,3 @@ class LatexSourcesLoader:
         print('LaTeX source files detected:')
         for k in self.sources.keys():
             print(f'  - {k}')
-
-
-if __name__ == '__main__':
-    loader = LatexSourcesLoader('./2301.01235/')
-    loader.load_sources()
-
