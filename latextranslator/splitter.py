@@ -42,6 +42,8 @@ def _split(text: str, separator) -> List[str]:
 
 
 class LatexSourceSplitter:
+    """A non-overlapping LaTeX text splitter that preserves all delimiters.
+    This splitter is rewritten from LangChain.text_splitter.LatexTextSplitter """
     
     def __init__(
         self,
@@ -101,10 +103,8 @@ class LatexSourceSplitter:
         return final_chunks
 
 
-def test_splitter():
-    with open('./2301.01235/background.tex', 'r') as f:
-        test_str = f.read()
-    splitter = LatexSourceSplitter(chunk_size=3000)
+def test_splitter(test_str):
+    splitter = LatexSourceSplitter(chunk_size=500)
     splits = splitter.split_text(test_str)
     # should not change any text
     assert ''.join(splits) == test_str
