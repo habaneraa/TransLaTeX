@@ -1,6 +1,6 @@
 
 import os
-from typing import List, Dict
+from typing import List, Dict, Optional
 from pylatexenc.latexwalker import (
     LatexWalker,
     LatexNode,
@@ -33,17 +33,44 @@ class LatexSourcesLoader:
     
     @staticmethod
     def get_text_from_nodes(node_list: List[LatexNode]) -> str:
-        texts = [n.latex_verbatim() for n in node_list]
+        texts = []
+        for n in node_list:
+            if n is None: continue
+            texts.append(n.latex_verbatim())
+        
         return ''.join(texts)
     
     @staticmethod
     def contains_environment(path, environment: str) -> bool:
         node_list = LatexSourcesLoader.parse_latex_file(path)
         for node in node_list:
-            if node.isNodeType(LatexEnvironmentNode):
-                if node.envname == environment:
+            if LatexSourcesLoader.find_env_node(node, environment):
                     return True
         return False
+    
+    @staticmethod
+    def find_env_node(cur_node, environment: str) -> Optional[LatexNode]:
+        if cur_node is None or \
+           cur_node.nodeType() not in [LatexEnvironmentNode, LatexGroupNode, LatexMacroNode]: 
+                return None
+        if cur_node.isNodeType(LatexEnvironmentNode) and \
+           cur_node.envname == environment:
+                return cur_node
+
+        node_list, env_node = None, None
+        if cur_node.isNodeType(LatexMacroNode):
+            if cur_node.nodeargd is None: 
+                return None
+            node_list = cur_node.nodeargd.argnlist
+        else:
+            node_list = cur_node.nodelist
+
+        for node in node_list:
+            if node is None: continue
+            env_node = LatexSourcesLoader.find_env_node(node, environment)
+            if env_node: break
+        
+        return env_node
 
     def find_document_environment(self) -> None:
         print(f'No main source file specified. Looking for "document" latex environment in {self.project_dir} ...')
@@ -86,8 +113,8 @@ class LatexSourcesLoader:
 
         document_env_node = None
         for node in nodes_main:
-            if node.isNodeType(LatexEnvironmentNode) and node.envname == 'document':
-                document_env_node = node
+            document_env_node = LatexSourcesLoader.find_env_node(node, 'document')
+            if document_env_node:
                 break
         
         document_nodes: List[LatexNode] = document_env_node.nodelist
