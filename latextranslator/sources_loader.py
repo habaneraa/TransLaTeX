@@ -50,23 +50,26 @@ class LatexSourcesLoader:
     
     @staticmethod
     def find_env_node(cur_node, environment: str) -> Optional[LatexNode]:
-        if cur_node is None: return None
-        if cur_node.nodeType() not in [LatexEnvironmentNode, LatexGroupNode, LatexMacroNode]: return None
-        
-        node_list = None
-        env_node = None
+        if cur_node is None or \
+           cur_node.nodeType() not in [LatexEnvironmentNode, LatexGroupNode, LatexMacroNode]: 
+                return None
+        if cur_node.isNodeType(LatexEnvironmentNode) and \
+           cur_node.envname == environment:
+                return cur_node
+
+        node_list, env_node = None, None
         if cur_node.isNodeType(LatexMacroNode):
-            if not cur_node.nodeargd: return None
+            if cur_node.nodeargd is None: 
+                return None
             node_list = cur_node.nodeargd.argnlist
         else:
             node_list = cur_node.nodelist
 
         for node in node_list:
             if node is None: continue
-            if node.isNodeType(LatexEnvironmentNode) and node.envname == environment:
-                env_node = node
-                break
             env_node = LatexSourcesLoader.find_env_node(node, environment)
+            if env_node: break
+        
         return env_node
 
     def find_document_environment(self) -> None:
