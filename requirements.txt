@@ -2,3 +2,4 @@ pylatexenc
 openai
 tiktoken
 backoff
+LangChain
