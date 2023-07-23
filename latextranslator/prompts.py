@@ -1,4 +1,4 @@
-
+from langchain import LangChain
 latex_translation_prompt = f"""Translate LaTeX text from {{src_lang}} into {{tgt_lang}}. 
 These texts are from a academic research paper so your translation should follow guidelines of academic writing.
 You should only translate the plain text and your outputs are in LaTeX format.
@@ -21,4 +21,6 @@ Ensure your output can be parsed successfully by LaTeX compilers.
 
 default_system = 'You are a helpful assistant.'
 def get_prompt(text, src_lang='English', tgt_lang='Chinese'):
-    return latex_translation_prompt.format(src_lang=src_lang, tgt_lang=tgt_lang, latex_text=text)
+    lang_chain = LangChain()
+    translated_text = lang_chain.translate(text, src_lang, tgt_lang)
+    return translated_text
