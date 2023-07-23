@@ -43,6 +43,15 @@ def chat_completion(user_prompt, system_prompt):
         time.sleep(rate_limit_interval)
     last_request_timestamp = time.time()
 
+    response = openai.ChatCompletion.create(
+        model=model_name,
+        messages=messages,
+        temperature=temperature,
+    )
+    return response['choices'][0]['message']['content'], response['usage']['total_tokens']
+
+
+def translate_chat(user_prompt):
     lang_chain = LangChain()
     translated_text = lang_chain.translate(user_prompt, 'en', 'fr')
     return translated_text
