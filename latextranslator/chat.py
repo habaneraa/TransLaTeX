@@ -1,7 +1,7 @@
-
 import backoff
 import openai
 import time
+from langchain import LangChain
 import logging
 
 from .tokenizer import count_message_tokens
@@ -43,9 +43,6 @@ def chat_completion(user_prompt, system_prompt):
         time.sleep(rate_limit_interval)
     last_request_timestamp = time.time()
 
-    response = openai.ChatCompletion.create(
-        model=model_name,
-        messages=messages,
-        temperature=temperature,
-    )
-    return response['choices'][0]['message']['content'], response['usage']['total_tokens']
+    lang_chain = LangChain()
+    translated_text = lang_chain.translate(user_prompt, 'en', 'fr')
+    return translated_text
