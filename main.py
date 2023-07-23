@@ -19,12 +19,14 @@ def main():
     args = argparser.parse_args()
 
     # get api key
-    if args.api_key:
+    openai.api_key = os.environ.get('OPENAI_API_KEY')
+    if args.api_key is not None:
         openai.api_key = args.api_key
     else:
-        with open(args.api_key_path, 'r') as f:
-            api_key = f.read().strip()
-        openai.api_key = api_key
+        if not openai.api_key:
+            with open(args.api_key_path, 'r') as f:
+                api_key = f.read().strip()
+            openai.api_key = api_key
 
     # prepare output directory
     if args.output is None:
