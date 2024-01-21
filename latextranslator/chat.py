@@ -10,7 +10,7 @@ from .tokenizer import count_message_tokens
 # api logger
 logger = logging.getLogger('openai-api')
 # api request config
-model_name = 'gpt-3.5-turbo'
+model_name = 'gpt-4'
 token_limit = 4096
 temperature = 0.0
 prompt_token_limit = 1500
