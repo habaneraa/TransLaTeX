@@ -20,6 +20,20 @@ Intuitive text-based user interface:
 
 ## Quick Start
 
+Install TransLaTeX with [pipx](https://github.com/pypa/pipx):
+
+```bash
+pipx install git+https://github.com/habaneraa/TransLaTeX.git
+```
+
+And launch the app in CLI directly!
+
+```bash
+trans-latex
+```
+
+If you do not use pipx, you can install TransLaTeX in your Python virtual environment.
+
 Create a **Python 3.12 virtual environment** and run:
 
 ```bash
