@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "trans-latex"
+version = "0.1.0"
+description = "A tool for translating LaTeX projects with your favorite LLM."
+authors = ["habaneraa"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+aiofiles = "^23.2.1"
+litellm = "^1.35.1"
+pylatexenc = "^2.10"
+aiohttp = "^3.9.4"
+textual = "^0.56.4"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.3.0"
+mypy = "^1.9.0"
+textual-dev = "^1.5.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

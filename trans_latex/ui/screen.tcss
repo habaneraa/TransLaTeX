@@ -1,0 +1,58 @@
+#sidebar {
+    dock: left;
+    height: 100%;
+    width: 30%;
+    min-width: 30;
+    background: $panel;
+    padding: 1 2;
+}
+
+#sidebar-title {
+    padding: 1 3;
+    margin: 1 0 1 0;
+    width: 100%;
+    content-align: left middle;
+    background: $background-lighten-1;
+}
+
+.side-button {
+    height: 1fr;
+    min-height: 3;
+    max-height: 5;
+    width: 100%;
+    border: double $secondary-background;
+}
+
+.side-button-current {
+    background: $accent;
+    border: $primary heavy;
+    /*color: $secondary;*/
+}
+
+.side-button-finished {
+    border: $success heavy;
+}
+
+
+
+.config-page {
+    padding: 2 4;
+    width: 100%;
+    height: 1fr;
+    background: $background;
+}
+
+WelcomeScreen {
+    margin: 2 4 2 4;
+    align: center middle;
+    background: $background;
+}
+
+WelcomeScreen Markdown {
+    width: 64;
+}
+
+WelcomeScreen Button {
+    margin: 2 4 2 4;
+    width: 64;
+}

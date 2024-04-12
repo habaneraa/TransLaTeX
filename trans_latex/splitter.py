@@ -1,6 +1,5 @@
 
-from .tokenizer import tiktoken_length
-from typing import List, Iterable, Callable
+from typing import Iterable, Callable
 
 
 latex_macro_separators = [
@@ -29,33 +28,34 @@ latex_macro_separators = [
     " ",
 ]
 
-def _split(text: str, separator) -> List[str]:
+def _split(text: str, separator: str) -> list[str]:
+    """delimiter-preserving split operation"""
     splits = text.split(separator)
-    if len(splits) == 1:
-        return splits
     if len(splits) > 1:
         new_split = [splits[0]]
         for split in splits[1:]:
             new_split.append(separator + split)
         splits = list(filter(lambda x: x != '', new_split))
         return splits
+    else:
+        return splits
 
 
 class LatexSourceSplitter:
-    """A non-overlapping LaTeX text splitter that preserves all delimiters.
+    """A non-overlapping LaTeX source splitter that preserves all delimiters.
     This splitter is rewritten from LangChain.text_splitter.LatexTextSplitter """
     
     def __init__(
         self,
-        chunk_size: int = 1500,
-        length_function: Callable[[str], int] = tiktoken_length,
-        separators: List[str] = None,
+        chunk_size: int,
+        length_function: Callable[[str], int],
+        separators: list[str] = latex_macro_separators,
     ):
         self._chunk_size = chunk_size
         self._length_function = length_function
-        self._separators = separators if separators else latex_macro_separators
+        self._separators = separators
     
-    def merge_splits(self, splits: Iterable[str]) -> List[str]:
+    def merge_splits(self, splits: Iterable[str]) -> list[str]:
         # We now want to combine these smaller pieces into medium size chunks
         merged_splits = []
         current_chunk = []
@@ -73,7 +73,7 @@ class LatexSourceSplitter:
         # assert ''.join(splits) == ''.join(merged_splits)
         return merged_splits
 
-    def split_text(self, text: str) -> List[str]:
+    def split_text(self, text: str) -> list[str]:
         """Split incoming text and return chunks. Retain all separators."""
         final_chunks = []
         # Get appropriate separator to use
@@ -104,7 +104,7 @@ class LatexSourceSplitter:
 
 
 def test_splitter(test_str):
-    splitter = LatexSourceSplitter(chunk_size=500)
+    splitter = LatexSourceSplitter(chunk_size=500, length_function=len)
     splits = splitter.split_text(test_str)
     # should not change any text
     assert ''.join(splits) == test_str

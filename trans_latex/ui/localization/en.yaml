@@ -1,0 +1,44 @@
+string_values:
+  hello: Hello World!
+  confirm: Confirm
+  download: Download
+  check: Check
+  start: Start
+
+  welcome_md: "# Welcome to TransLaTeX\n\nGitHub: https://github.com/habaneraa/TransLaTeX \n\nReport Issue: https://github.com/habaneraa/TransLaTeX/issues \n\nRead Documents in `docs/`"
+
+  step_1_button: 1. Select LaTeX Project
+  step_2_button: 2. Provide your LLM API
+  step_3_button: 3. Translation Settings
+  step_4_button: 4. Estimate API Cost
+
+  config_steps: "Configuration Steps:"
+
+  p1_text_1: "Step 1. Prepare the LaTeX project to be translated. You can either ..."
+  p1_text_2: "### Download TeX source files from arXiv:"
+  p1_text_3: "Enter an arXiv identifier. e.g. \"1706.03762\""
+  p1_text_4: "### Or select a local directory:"
+  p1_text_5: "Enter a path to the project directory."
+
+  p2_text_1: "Step 2. Setup your LLM API"
+
+  p3_text_1: "Step 3. Set translation languages and terms"
+  p3_text_2: "Specify additional translation requirements below"
+  p3_text_3: "Note: This part of the text will be inserted into the prompt for the language model to reference. A common usage is to request the model to translate a specific professional term into your specified wording, which helps imporve consistency in translations across multiple requests. For example, you can write [ 'LLM' should be translated as '大语言模型' ] and [ 'Transformer' should remain untranslated ] in an unordered list."
+  p3_collapse_title: "Customize Your Prompt"
+  p3_preview_title: "Preview the Full Prompt"
+
+  p4_text_1: "Estimate token usage and API cost"
+  p4_estimation_result: "### Number of text chunks (API calls): {x}\n\n### Estimated token usage: {y}"
+  p4_start_button_0: "Please wait..."
+  p4_start_button_ok: "Start Translation!"
+  p4_start_button_failed: "Translation task is not ready to start..."
+  p4_dir_input: "Specify a directory for the translated project. Will use `./translated/` defautly."
+  p4_collapse_title: "Customize Path"
+
+  chunk_size_tip: "Max tokens of texts for each LLM request. It should not exceed half of the LLM context length."
+
+  top_warning: "Translation task has started. Do NOT close this window!"
+  completed_1: "🎉Congratulations🎉"
+  completed_2: "The translation has been completed!"
+  open_folder: "Click here to open the translated project"

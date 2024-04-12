@@ -1,31 +1,55 @@
 # TransLaTeX
 
-TransLaTeX is a lightweighted command line tool for translating LaTeX projects. By parsing and splitting the LaTeX content and leveraging GPT's capabilities, TransLaTeX can automatically translate content from any language to any other language.
+TransLaTeX is a simple tool for translating LaTeX projects using Large Language Models. It can automatically translate LaTeX sources from any language to any other language with precision and customization.
+
+:arrow_forward: [为什么有这个项目？](./docs/why_this_translator.md)
+
+:arrow_forward: [用户指南](./docs/user_guide_zh.md)
+
+建设初期，可能有较多 bug，欢迎[报告问题](https://github.com/habaneraa/TransLaTeX/issues/new/choose) | 中文 UI 有待填坑，目前进度 0%
+
+## Screenshots
+
+Paper that is automatically translated by TransLaTeX:
+
+![](./docs/img/demo-paper.jpg)
+
+Intuitive text-based user interface:
+
+![](./docs/img/tui-demo1.png)
+
+## Quick Start
+
+Create a **Python 3.12 virtual environment** and run:
+
+```bash
+pip install git+https://github.com/habaneraa/TransLaTeX.git
+```
+
+Or clone the source code:
+
+```bash
+git clone https://github.com/habaneraa/TransLaTeX.git
+cd TransLaTeX
+pip install . -e
+```
+
+Then launch the application by:
+
+```bash
+python -m trans_latex
+```
+
+## FAQ
+
+Q: How to copy/paste texts in the TUI?
+
+A: Try Ctrl+Shift+C/V. This works on Windows Terminal.
 
 ## How does it work?
 
 1. Parse the main document source file and recursively find all referenced .tex source files.
 2. Automatically divide the LaTeX texts into smaller pieces with a proper size (smaller than a given chunk size).
-3. Use ChatGPT to translate all of the LaTeX texts.
+3. Use LLM API service (e.g. ChatGPT from OpenAI) to translate all of the LaTeX text chunks.
 4. Create a new project with the translated files, keeping the project structure unchanged.
 5. Compile the source and obtain the translated paper! (by yourself)
-
-## Quick Start
-
-Create a Python environment and install the required dependencies.
-
-```bash
-conda create -n translatex python==3.9
-pip install -r requirements.txt
-```
-
-Download the LaTeX source of the paper to be translated. E.g. go to an arXiv abs page -> "Other Formats" -> "Download Source" -> extract the .tar.gz file.
-
-Prepare your OpenAI API key. You can provide the key as a command-line argument `--api_key`, or save the key in the file `./openai-api-key`.
-
-Run the `main.py` script in the root directory.
-
-```bash
-conda activate translatex
-python ./main.py /path/to/latex/project
-```

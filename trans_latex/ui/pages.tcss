@@ -1,0 +1,63 @@
+
+#config-page-confirm {
+    width: 100%;
+    margin: 1 5 2 5;
+}
+
+#status-text {
+    display: none;
+}
+
+.emph-text {
+    color: $primary-lighten-1;
+}
+
+.button-submit {
+    width: 12;
+}
+
+.input-and-submit {
+    margin: 0 4 0 4;
+    width: 100%;
+    height: 5;
+}
+
+Input {
+    width: 1fr;
+}
+
+Input.-valid {
+    border: tall $success 50%;
+}
+Input.-valid:focus {
+    border: tall $success;
+}
+
+#test-api-button {
+    width: 100%;
+    margin: 1 5 1 5;
+}
+
+TextArea {
+    width: 100%;
+    height: 1fr;
+    min-height: 10;
+    margin: 0 2 1 2;
+    border: round $primary
+}
+
+Collapsible {
+    width: 100%;
+    margin: 1 4 0 4;
+}
+
+#target-dir-input {
+    width: 100%;
+    margin: 1 2 1 0;
+}
+
+#start-task-button {
+    width: 100%;
+    margin: 1 5 2 5;
+}
+
