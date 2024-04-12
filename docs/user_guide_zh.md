@@ -27,16 +27,25 @@
 - 如果没有条件，可以使用国内的 OpenAI API 代理服务，有时第三方代理的价格甚至更实惠
 - 除 OpenAI 外，众多 LLM 服务商也都可使用，因为他们的 API 接口是和 OpenAI 兼容的。（例如 [DeepSeek 开放平台](https://platform.deepseek.com/)）
 - 你需要确认以下内容并提供给 TransLaTeX
-  - API 服务地址，应该类似于 `https://api.xxxxxx.com/v1`
+  - API 服务地址，应该类似于 `https://api.openai.com/v1`
   - 你的 API 密钥
   - 模型的上下文长度 (context length)，为了防止翻译工作超出模型 token 限制，chunk size 不得超过模型限制的一半
 
 ## 安装
 
+如果你使用 [pipx](https://pipx.pypa.io/latest/)，只需以下一个命令即可自动安装，安装后可以直接在命令行启动。
+
+```bash
+pipx install git+https://github.com/habaneraa/TransLaTeX.git
+trans-latex
+```
+
+如果不使用 pipx，那么请自行准备 Python 环境，可以采用如下方式：
+
 首先用你喜欢的方式创建一个 Python 3.12 的环境，例如：
 
 ```bash
-conda 
+conda create -n translatex python>3.12
 ```
 
 然后使用 pip 命令即可安装：
