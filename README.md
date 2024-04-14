@@ -60,6 +60,10 @@ Q: How to copy/paste texts in the TUI?
 
 A: Try Ctrl+Shift+C/V. This works on Windows Terminal.
 
+## TODO List
+
+- [ ] Show proper error messages when API requests fail
+
 ## How does it work?
 
 1. Parse the main document source file and recursively find all referenced .tex source files.

@@ -25,7 +25,7 @@
 
 - 可直接使用 OpenAI 官方 API 调用 GPT 模型系列
 - 如果没有条件，可以使用国内的 OpenAI API 代理服务，有时第三方代理的价格甚至更实惠
-- 除 OpenAI 外，众多 LLM 服务商也都可使用，因为他们的 API 接口是和 OpenAI 兼容的。（例如 [DeepSeek 开放平台](https://platform.deepseek.com/)）
+- 除 OpenAI 外，众多 LLM 服务商也都可使用，因为他们的 API 接口是和 OpenAI 兼容的。（例如 [DeepSeek 开放平台](https://platform.deepseek.com/)，[Moonshoot AI 开放平台](https://platform.moonshot.cn/) 等）
 - 你需要确认以下内容并提供给 TransLaTeX
   - API 服务地址，应该类似于 `https://api.openai.com/v1`
   - 你的 API 密钥
@@ -68,4 +68,5 @@ python -m trans_latex
 
 ## 其他
 
-项目刚刚完成开发，可能有较多 bug，欢迎 issue / pull request。若有疑问，可以在 [GitHub 讨论区](https://github.com/habaneraa/TransLaTeX/discussions) 发帖。如果后续发现讨论需求较多，再考虑建群。
+项目刚刚完成开发，可能有较多 bug，欢迎 bug report / feature request / pull request。若有疑问，可以在 [GitHub 讨论区](https://github.com/habaneraa/TransLaTeX/discussions) 发帖。如果后续发现讨论需求较多，再考虑建群。
+
