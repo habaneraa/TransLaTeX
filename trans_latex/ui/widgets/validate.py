@@ -14,3 +14,15 @@ class ValidDirPath(Validator):
             return self.success()
         else:
             return self.failure()
+
+
+class ValidTemperature(Validator):
+    def validate(self, value: str) -> ValidationResult:
+        try:
+            t = float(value)
+        except ValueError as e:
+            return self.failure()
+        if 0.0 <= t <= 1.0:
+            return self.success()
+        else:
+            return self.failure()

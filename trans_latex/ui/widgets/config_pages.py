@@ -13,7 +13,7 @@ from textual.worker import Worker, WorkerState
 from trans_latex.ui.localization import resources
 from trans_latex.ui.widgets.labeled_input import InputWithLabel
 from trans_latex.ui.utils import adownload
-from trans_latex.ui.widgets.validate import ValidDirPath
+from trans_latex.ui.widgets.validate import ValidDirPath, ValidTemperature
 from trans_latex.ui.task import current_task
 
 from trans_latex.llm import LLMServiceConfig, check_valid_key
@@ -154,6 +154,7 @@ class APIKey(ConfigPage):
             )
             yield InputWithLabel(
                 'Temperature',
+                validators=[ValidTemperature()],
                 placeholder='0.2',
                 id='temperature-input',
             )
@@ -210,14 +211,19 @@ class APIKey(ConfigPage):
             self.query_one('#config-page-confirm').disabled = True
         event.stop()
     
+    def get_temperature(self) -> float:
+        try:
+            return float(self.query_one('#temperature-input').value)
+        except ValueError as e:
+            return 0.1
+    
     def get_api_service_config(self) -> LLMServiceConfig | None:
         data = LLMServiceConfig(
             api_base=self.query_one('#api-base-input').value,
             api_key=self.query_one('#api-key-input').value,
             model=self.query_one('#model-input').value,
-            temperature=self.query_one('#temperature-input').value,
+            temperature=self.get_temperature(),
         )
-        data = LLMServiceConfig()
         if data.api_key:
             return data
         else:
