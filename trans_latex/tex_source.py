@@ -33,7 +33,10 @@ class LatexSourcesLoader:
     def get_text_from_nodes(node_list: list[LatexNode]) -> str:
         texts = []
         for n in node_list:
-            if n is None: continue
+            if n is None:
+                continue
+            if isinstance(n, LatexCommentNode):
+                continue
             texts.append(n.latex_verbatim())
         
         return ''.join(texts)

@@ -35,7 +35,7 @@ def chat_completion(llm_config: LLMServiceConfig, messages: list[dict[str, str]]
 
 @tenacity.retry(
     stop=tenacity.stop_after_attempt(5),
-    wait=tenacity.wait_exponential(multiplier=5, exp_base=2, max=120),
+    wait=tenacity.wait_exponential(multiplier=5, exp_base=2, max=60),
     reraise=True,
 )
 async def async_chat_completion(llm_config: LLMServiceConfig, messages: list[dict[str, str]], **kwargs):
