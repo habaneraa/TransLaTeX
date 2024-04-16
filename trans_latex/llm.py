@@ -1,8 +1,9 @@
 
 from dataclasses import dataclass, asdict
 import litellm
+import tenacity
 
-
+litellm.set_verbose = True
 litellm.register_model({
     "deepseek-chat": {
         "max_tokens": 16_000, 
@@ -32,15 +33,24 @@ def chat_completion(llm_config: LLMServiceConfig, messages: list[dict[str, str]]
     return response, completion_cost
 
 
-async def async_chat_completion(llm_config: LLMServiceConfig, messages: list[dict[str, str]]):
+@tenacity.retry(
+    stop=tenacity.stop_after_attempt(5),
+    wait=tenacity.wait_exponential(multiplier=5, exp_base=2, max=120),
+    reraise=True,
+)
+async def async_chat_completion(llm_config: LLMServiceConfig, messages: list[dict[str, str]], **kwargs):
+    try:
+        litellm.get_llm_provider(llm_config.model)
+    except litellm.exceptions.BadRequestError as e:
+        llm_config.model = f'openai/{llm_config.model}'
     response = await litellm.acompletion(
         messages=messages,
         stream=False,
         **asdict(llm_config),
+        **kwargs
         # mock_response="It's simple to use and easy to get started"
     )
     return response
-
 
 
 """
@@ -69,16 +79,17 @@ async def async_chat_completion(llm_config: LLMServiceConfig, messages: list[dic
 async def check_valid_key(llm_config: LLMServiceConfig):
     """    Checks if a given API key is valid for a specific model    """
     try:
-        response = await litellm.acompletion(
+        await async_chat_completion(
+            llm_config=llm_config,
             messages=[{"role": "user", "content": "Hey, how's it going?"}],
-            stream=False,
-            max_tokens=5,
-            **asdict(llm_config)
+            max_tokens=5
         )
         return True
     except litellm.AuthenticationError as e:
+        print(e)
         return False
     except Exception as e:
+        print(e)
         return False
 
 

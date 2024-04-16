@@ -1448,6 +1448,20 @@ files = [
 ]
 
 [[package]]
+name = "tenacity"
+version = "8.2.3"
+description = "Retry code until it succeeds"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "tenacity-8.2.3-py3-none-any.whl", hash = "sha256:ce510e327a630c9e1beaf17d42e6ffacc88185044ad85cf74c0a8887c6a0f88c"},
+    {file = "tenacity-8.2.3.tar.gz", hash = "sha256:5398ef0d78e63f40007c1fb4c0bff96e1911394d2fa8d194f77619c05ff6cc8a"},
+]
+
+[package.extras]
+doc = ["reno", "sphinx", "tornado (>=4.5)"]
+
+[[package]]
 name = "textual"
 version = "0.56.4"
 description = "Modern Text User Interface framework"
@@ -1846,4 +1860,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "af43b751ade7b4b1be2bc2712f19967880667da3ace6105e54d3494e2ad2bd61"
+content-hash = "b30bb3037ee332fec683c9d9af07999c7ffd4da0b16db37ada215922e8f05cd5"

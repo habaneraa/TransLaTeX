@@ -13,6 +13,7 @@ litellm = "^1.35.1"
 pylatexenc = "^2.10"
 aiohttp = "^3.9.4"
 textual = "^0.56.4"
+tenacity = "^8.2.3"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.3.0"
