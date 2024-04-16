@@ -19,13 +19,16 @@
 - 推荐 [Overleaf](https://cn.overleaf.com/)，无需搭建本地环境
 - 本地编译可使用 TeXLive
 
-第二，如果你有特定的排版需求（例如提交外文翻译作业），可以寻求第三方 LaTeX 模版，例如 [BIThesis](https://github.com/BITNP/BIThesis/tree/main/templates/paper-translation)。
+第二，如果你有特定的排版需求（例如提交外文翻译作业），可以寻求第三方 LaTeX 模版。
+- 例如 [BIThesis](https://github.com/BITNP/BIThesis/tree/main/templates/paper-translation)
 
 第三，准备大模型 API Key。
 
-- 可直接使用 OpenAI 官方 API 调用 GPT 模型系列
-- 如果没有条件，可以使用国内的 OpenAI API 代理服务，有时第三方代理的价格甚至更实惠
-- 除 OpenAI 外，众多 LLM 服务商也都可使用，因为他们的 API 接口是和 OpenAI 兼容的。（例如 [DeepSeek 开放平台](https://platform.deepseek.com/)，[Moonshoot AI 开放平台](https://platform.moonshot.cn/) 等）
+- 如果你有 OpenAI 账户可直接使用 OpenAI 官方 API 调用 GPT 模型系列
+- 如果没有条件，可以使用 OpenAI API 代理服务，有时第三方代理的价格甚至更实惠
+- 除 OpenAI 外，众多国内外 LLM 服务商也都可使用，因为他们的 API 接口是和 OpenAI 兼容的。例如：
+  - [DeepSeek 开放平台](https://platform.deepseek.com/)
+  - [Moonshoot AI 开放平台](https://platform.moonshot.cn/)
 - 你需要确认以下内容并提供给 TransLaTeX
   - API 服务地址，应该类似于 `https://api.openai.com/v1`
   - 你的 API 密钥
