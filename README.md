@@ -45,7 +45,7 @@ Or clone the source code:
 ```bash
 git clone https://github.com/habaneraa/TransLaTeX.git
 cd TransLaTeX
-pip install . -e
+pip install -e .
 ```
 
 Then launch the application by:
